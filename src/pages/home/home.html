@@ -7,8 +7,30 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+  <ion-list padding>
+    <button ion-button block (click)="startScanning()">scan</button>
+    <ion-list-header>
+      Paired Devices
+    </ion-list-header>
+    <ion-item *ngFor="let device of pairedDevices">
+      {{device.name}}
+    </ion-item>
+    <button ion-button block (click)="disconnect()">Disconnect</button>
+    <ion-list-header>
+      availlable Devices
+    </ion-list-header>
+    <ion-item *ngFor='let device of unpairedDevices'>
+      <span (click)="selectDevice(device.address)">
+        {{device.name}}
+      </span>
+    </ion-item>
+    <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+
+
+    <ion-item>
+      <button ion-button (click)="sendDataToSerial()">Yazdır</button>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
